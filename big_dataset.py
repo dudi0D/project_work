@@ -23,14 +23,15 @@ plt.plot(data['Время сбора данных'], data['Давление'])
 for num, _ in enumerate(data['Давление']):
     t = []
     n = 3 # скользящее среднее по n точкам
+    shift = (n - 1) // 2
     for i in range(n):
-        index = num - 1 + i
-        if index > len(data['Давление']):
+        index = num - shift + i
+        if index >= len(data['Давление']):
             t.append(data['Давление'][index % len(data['Давление'])])
         elif index >= 0:
             t.append(data['Давление'][index])
         else:
-            t.append(data['Давление'][len(data['Давление']) - 1])
+            t.append(data['Давление'][len(data['Давление']) + index])
     data['Давление'][num] = np.sum(t) / n
 x = data.values
 scaler = MinMaxScaler()
