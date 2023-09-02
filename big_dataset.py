@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 from keras.models import Sequential
-from keras.layers import Dense, LSTM, GRU, Dropout
+from keras.layers import Dense, LSTM, GRU, Dropout, SimpleRNN
 import seaborn as sns
 import keras
 
@@ -47,7 +47,7 @@ Y = data.loc[:, 1]
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, shuffle=False)
 model = Sequential()
 model.add(Dense(64, input_shape=(14, 1)))
-model.add(GRU(300, return_sequences=True))
+model.add(GRU(300))
 # model.add(GRU(300))
 model.add(Dense(1))
 epochs = 10
